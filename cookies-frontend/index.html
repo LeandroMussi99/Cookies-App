@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO básico -->
+    <meta name="description" content="Cookies artesanales recién horneadas. Pedí online y retirás o recibís en tu casa. Hechas con ingredientes de calidad.">
+    <!-- Navegador móvil: color del tema -->
+    <meta name="theme-color" content="#a14c2d">
+    <!-- Open Graph (Facebook/WhatsApp) -->
+    <meta property="og:title" content="Cookies artesanales - Pedidos online">
+    <meta property="og:description" content="Pedí cookies recién horneadas. Ricas, caseras y con envío.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cookies-frontend.pages.dev/">
+    <!-- Podés reemplazar esta imagen cuando tengas una propia hospedada -->
+    <meta property="og:image" content="https://cookies-frontend.pages.dev/og-default.jpg">
+    <meta property="og:image:alt" content="Caja con cookies artesanales">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cookies artesanales - Pedidos online">
+    <meta name="twitter:description" content="Pedí cookies recién horneadas. Ricas, caseras y con envío.">
+    <meta name="twitter:image" content="https://cookies-frontend.pages.dev/og-default.jpg">
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Cookies de Mama</title>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a class="brand" href="#">Cookies de Mamá</a>
+            <nav class="main-nav" arial-label="Navegacion principal">
+                <a href="#productos">Productos</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <button id="btn-ver-carrito" class="cart-button" arial-label="Ver carrito">
+                🛒 <span id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="wrap layout">
+        <section class="catalogo">
+            <h2 id="productos">Nuestros Productos</h2>
+
+            <!--Contenedor donde JS va a "inyectar" las cards-->
+            <div id="lista-productos" class="cards"></div>
+
+            <!-- Mensaje de estado/errores de la carga -->
+             <div id="productos-msg" class="msg" aria-live="polite"></div>
+        </section>
+
+        <aside class="carrito" id="carrito">
+            <h2>Carrito (<span id="cart-count-aside">0</span>)</h2>
+
+            <!-- Lista dinamica del carrito -->
+             <ul id="cart-list"></ul>
+
+             <!--Total dinamico -->
+             <div class="total">Total: <span id="cart-total">0.00</span></div>
+             <button id="btn-vaciar" class="btn-secondary" type="button">Vaciar Carrito</button>
+
+             <h3>Datos de contacto</h3>
+             <form id="checkout-form" class="form" novalidate>
+
+                <label>Nombre y Apellido
+                    <input name="nombre" type="text" autocomplete="name" required placeholder="Tu nombre y apellido">
+                    <small class="error"></small>
+                </label>
+
+                <label>Email
+                    <input name="email" type="email" autocomplete="email"  placeholder="Tu@email.com">
+                    <small class="error"></small>
+                </label>
+
+                <label>Telefono
+                    <input name="telefono" type="tel" autocomplete="tel" placeholder="+54 .....">
+                    <small class="error"></small>
+                </label>
+
+                <small class="form-aviso">
+                    * Debes ingresar <b>email</b> o <b>telefono</b> (al menos uno)
+                </small>
+
+                <label>Notas
+                    <textarea name="notas" rows="3" type="text" placeholder="Instrucciones, horarios, etc"></textarea>
+                    <small class="error"></small>
+                </label>
+
+                <label class="remember">
+                    <input type="checkbox" id="remember-datos">
+                    Recordar mis datos
+                </label>
+
+                <button type="submit" class="btn-primary">Ir a pagar</button>
+             </form>
+
+             <!--Mensaje del flujo de checkout -->
+             <div id="msg" role="status" aria-live="polite"></div>
+
+        </aside>
+    </main>
+
+    <footer class="wrap footer">
+        <small>© 2025 Leandro Mussi</small>
+    </footer>
+
+    <!-- Modal Quick View -->
+    <div id="product-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-panel" role="document">
+        <button class="modal-close" aria-label="Cerrar" data-close>×</button>
+        <div class="modal-content">
+            <img id="modal-img" alt="" loading="lazy">
+            <div class="modal-info">
+            <h2 id="modal-title"></h2>
+            <p id="modal-price" class="price"></p>
+            <p id="modal-desc" class="desc"></p>
+
+            <!-- Control cantidad estilo “- 1 +” -->
+            <div class="qty-control" role="group" aria-label="Cantidad">
+            <button class="qty-btn" data-act="dec" aria-label="Restar">−</button>
+            <output id="modal-qty-out" for="modal-qty">1</output>
+            <button class="qty-btn" data-act="inc" aria-label="Sumar">+</button>
+            </div>
+            <input id="modal-qty" type="number" min="1" value="1" inputmode="numeric" class="sr-only">
+
+            <!-- Input real (sin spinners) para accesibilidad/sync -->
+            <input id="modal-qty" type="number" min="1" value="1" inputmode="numeric" class="sr-only">
+
+            <button id="modal-add" class="add-quick btn-modal">Agregar al carrito</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+</body>
+</html>

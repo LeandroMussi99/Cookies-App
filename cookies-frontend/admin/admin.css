@@ -1,0 +1,113 @@
+/* admin.css - estilos del panel admin */
+:root{
+    --primario: #a14c2d;
+    --marronPastel: #f8dcd2;
+    --bordePastel: #e6c7bd;
+    --fondoTabla: #faf4ef;
+    --cremaSuave:#fff8f6;
+    --gris: #dbdbdb;
+    --blanco: #fff;
+    --negro: #000;
+}
+
+.admin-wrap { 
+  max-width: 1100px; 
+  margin: 1rem auto; 
+  padding: 0 1rem; 
+}
+
+.admin-header { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: .75rem; 
+}
+
+.admin-actions { 
+  display: flex; 
+  gap: .5rem; 
+  align-items: center; 
+}
+
+.btn { 
+  padding: .5rem .75rem; 
+  border-radius: .6rem; 
+  border: 1px solid var(--bordePastel); 
+  background: var(--blanco); 
+  cursor: pointer; 
+}
+
+.btn.primary { 
+  background: var(--primario); 
+  color: var(--blanco); 
+  border-color: var(--primario); 
+}
+
+.table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  background: var(--blanco); 
+  border-radius: 12px; 
+  overflow: hidden; 
+  box-shadow: 0 6px 20px rgba(0,0,0,.06); 
+}
+
+.table th, .table td { 
+  padding: .6rem .75rem; 
+  border-bottom: 1px solid var(--bordePastel); 
+  text-align: left; 
+  vertical-align: top; 
+}
+
+.table th { 
+  background: var(--fondoTabla); 
+  font-weight: 700; 
+}
+
+.table tr:last-child td { 
+  border-bottom: 0; 
+}
+
+.thumb { 
+  width: 72px; 
+  height: 56px; 
+  object-fit: cover; 
+  border-radius: 8px; 
+  background: #ffe6de; 
+}
+
+.tag { 
+  font-size: .8rem; 
+  padding: .15rem .5rem; 
+  border-radius: .5rem; 
+  background: #fff4f2; 
+  color: #7a2a1a; 
+  border: 1px solid #f0ccc2; 
+}
+
+/* === Modal producto === */
+#modal-prod {
+  border: 0;
+  border-radius: 14px;
+  padding: 0;
+  width: min(720px, 95vw);
+  box-shadow: 0 25px 60px rgba(0,0,0,.25);
+}
+
+#modal-prod::backdrop { background: rgba(0,0,0,.45); }
+
+.modal-head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: .9rem 1rem; background:#faf4ef; border-bottom:1px solid #f0e7e0; border-radius:14px 14px 0 0;
+}
+.modal-body { padding: 1rem; display:grid; gap:.75rem; }
+.modal-actions { display:flex; justify-content:flex-end; gap:.5rem; padding: 0 1rem 1rem; }
+
+.form-grid {
+  display:grid; grid-template-columns: 1fr 1fr; gap:.75rem;
+}
+.form-grid label { display:grid; gap:.35rem; }
+.form-grid input, .form-grid textarea {
+  padding:.6rem; border:1px solid #e6c7bd; border-radius:8px; background:#fff;
+}
+.form-grid textarea { min-height: 90px; resize: vertical; }

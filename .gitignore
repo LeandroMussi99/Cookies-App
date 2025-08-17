@@ -1,0 +1,83 @@
+# =======================================
+# Node / JavaScript / TypeScript
+# =======================================
+node_modules/
+dist/
+build/
+.cache/
+.tmp/
+*.tsbuildinfo
+
+# =======================================
+# Cloudflare Workers / Wrangler
+# =======================================
+.wrangler/
+.worker/
+functions/.wrangler/
+
+# =======================================
+# Archivos de entorno (⚠️ claves sensibles)
+# =======================================
+.env
+.env.*
+*.local
+
+# =======================================
+# Logs
+# =======================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =======================================
+# Sistema operativo
+# =======================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =======================================
+# IDEs / editores
+# =======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =======================================
+# Coverage / Testing
+# =======================================
+coverage/
+*.lcov
+.jest/
+
+# =======================================
+# Frontend (Pages / static builds)
+# =======================================
+# Si usás un build tool (ej: Vite, React, Next) ignorá la carpeta final de build
+# Para tu caso, solo si generás un dist/ del front
+frontend/dist/
+frontend/.cache/
+
+# =======================================
+# Otros
+# =======================================
+*.bak
+*.tmp
+*.log
+
+# =======================================
+# Wrangler / Config
+# =======================================
+wrangler.toml
+wrangler.json
+wrangler.jsonc
+
+# =======================================
+# Archivos locales de dev
+# =======================================
+.dev.vars
+*.env.local
+*.env.production
