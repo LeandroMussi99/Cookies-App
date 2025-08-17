@@ -82,12 +82,49 @@ async function cargarProductos() {
     productosCache = productos;
     $tbody.innerHTML = productos.map(rowHTML).join("");
     $msg.textContent = `Total: ${productos.length} productos.`;
+
+    // 👇 Agregar listeners después de renderizar la tabla
+    $tbody.querySelectorAll(".js-edit").forEach(($btn) => {
+      $btn.addEventListener("click", () => {
+        const $row = $btn.closest("tr");
+        const id = Number($row?.dataset.id);
+        const producto = productosCache.find((p) => p.id === id);
+        if (producto) openProdModal("edit", producto);
+      });
+    });
+
+    $tbody.querySelectorAll(".js-del").forEach(($btn) => {
+      $btn.addEventListener("click", () => {
+        const $row = $btn.closest("tr");
+        const id = Number($row?.dataset.id);
+        if (id) eliminarProducto(id);  // ✅ Usa la función que ya hicimos
+      });
+    });
+
   } catch (e) {
     console.error(e);
     $tbody.innerHTML = "";
     $msg.textContent = "No se pudieron cargar los productos.";
   }
 }
+
+
+function eliminarProducto(id) {
+  if (!confirm("¿Seguro que querés eliminar este producto?")) return;
+
+  (async () => {
+    try {
+      await apiAdmin(`/api/admin/productos/${id}`, {
+        method: "DELETE",
+      });
+      await cargarProductos(); // refresca la lista
+    } catch (err) {
+      console.error(err);
+      alert("No se pudo eliminar el producto. " + (err.message || ""));
+    }
+  })();
+}
+
 
 // ===== Modal (crear/editar) =====
 function openProdModal(mode, prod = {}) {

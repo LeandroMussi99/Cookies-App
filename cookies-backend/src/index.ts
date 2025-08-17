@@ -137,6 +137,23 @@ app.put('/api/admin/productos/:id', async (c) => {
   return c.json(rows[0])
 })
 
+
+app.delete("/api/admin/productos/:id", async (c) => {
+  const db = getDb(c.env); // ✅ agregamos esta línea para obtener el db
+  const id = Number(c.req.param("id"));
+  if (!id) return c.json({ error: "ID inválido" }, 400);
+
+  try {
+    await db`DELETE FROM productos WHERE id = ${id}`;
+    return c.json({ ok: true });
+  } catch (err) {
+    console.error("Error eliminando producto:", err);
+    return c.json({ error: "No se pudo eliminar" }, 500);
+  }
+});
+
+
+
 /* ---------------------- Pedidos + MP ----------------------- */
 
 type MPPreferenceResponse = {
