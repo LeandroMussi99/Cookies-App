@@ -1,0 +1,23 @@
+{
+	"name": "cookies-backend",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"@cloudflare/workers-types": "^4.20250807.0",
+		"typescript": "^5.5.2",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.28.1"
+	},
+	"dependencies": {
+		"@neondatabase/serverless": "^1.0.1",
+		"hono": "^4.9.0"
+	}
+}
