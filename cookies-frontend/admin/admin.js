@@ -263,14 +263,11 @@ function wireEvents() {
       return;
     }
 
-    // Eliminar lo conectamos cuando tengas el endpoint DELETE listo
     const btnDel = e.target.closest(".js-del");
     if (btnDel) {
-      alert("Eliminar: falta conectar al endpoint DELETE /api/admin/productos/:id");
-      // acá luego llamaremos:
-      // await apiAdmin(`/api/admin/productos/${id}`, { method: "DELETE" });
-      // await cargarProductos();
+      eliminarProducto(id);
     }
+
   });
 }
 
