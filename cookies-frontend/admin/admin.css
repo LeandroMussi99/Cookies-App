@@ -90,6 +90,122 @@
 .tab.active { background:#222; color:#fff; border-color:#222; }
 
 
+/* === Tabla de pedidos === */
+.tabla {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--blanco);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+  margin-top: 1rem;
+}
+
+.tabla th,
+.tabla td {
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--bordePastel);
+  text-align: left;
+  vertical-align: top;
+}
+
+.tabla th {
+  background: var(--fondoTabla);
+  font-weight: 600;
+  color: #623629;
+}
+
+.tabla tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.tabla tbody tr:hover {
+  background: var(--cremaSuave);
+}
+
+.tabla .col-id {
+  font-variant-numeric: tabular-nums;
+  color: #623629;
+  width: 70px;
+}
+
+.tabla .col-fecha {
+  white-space: nowrap;
+  min-width: 150px;
+}
+
+.tabla .col-cliente strong {
+  display: block;
+  font-size: .95rem;
+  color: #4a251a;
+}
+
+.tabla .col-cliente small {
+  display: block;
+  margin-top: .25rem;
+  color: #8a6a5a;
+}
+
+.tabla .col-contacto span {
+  display: block;
+  color: #6f584e;
+  line-height: 1.3;
+}
+
+.tabla .col-total {
+  text-align: right;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tabla .col-estado {
+  white-space: nowrap;
+}
+
+.tabla .col-accion {
+  text-align: right;
+  width: 90px;
+}
+
+.tabla .tag.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .75rem;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  background: #f5e4dd;
+  border-color: #edcfc0;
+  color: #7a2a1a;
+}
+
+.tabla .tag.estado.estado-pagado {
+  background: #e8f7ed;
+  border-color: #bde8ca;
+  color: #1f7a3d;
+}
+
+.tabla .tag.estado.estado-pendiente {
+  background: #fff4d9;
+  border-color: #f5dba0;
+  color: #a06800;
+}
+
+.tabla .tag.estado.estado-cancelado {
+  background: #fde6e6;
+  border-color: #f3b4b4;
+  color: #a12d2d;
+}
+
+.tabla .tag.estado.estado-en-proceso,
+.tabla .tag.estado.estado-procesando {
+  background: #e8efff;
+  border-color: #c2d6ff;
+  color: #3057a1;
+}
+
+
 /* === Modal producto === */
 #modal-prod {
   border: 0;
