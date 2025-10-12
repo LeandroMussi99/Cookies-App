@@ -19,6 +19,7 @@ const $viewPed = document.getElementById("vista-pedidos");
 // Pedidos DOM
 const $tbodyPed = document.getElementById("tbody-ped");
 const $msgPed = document.getElementById("msg-ped");
+const $btnBackProductos = document.getElementById("btn-back-productos");
 
 // ===== Caché local de productos (memoria) =====
 let productosCache = [];
@@ -136,6 +137,15 @@ function contactoBonito(row) {
   if (row.cliente_email) parts.push(row.cliente_email);
   if (row.cliente_telefono) parts.push(row.cliente_telefono);
   return parts.join(' · ');
+}
+
+function estadoClassName(estado) {
+  return String(estado || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 // ===== Modal (crear/editar) =====
@@ -279,6 +289,10 @@ function wireEvents() {
   // Nuevo producto
   $btnNuevo.addEventListener("click", () => openProdModal("new"));
 
+  if ($btnBackProductos) {
+    $btnBackProductos.addEventListener("click", () => showView("prod"));
+  }
+
   // Editar / Eliminar (delegación en el tbody)
   $tbody.addEventListener("click", (e) => {
     const tr = e.target.closest("tr");
@@ -323,14 +337,38 @@ const fmtDate = (iso) => new Date(iso).toLocaleString("es-AR");
 
 // Render fila pedido
 function rowPedidoHTML(p) {
+  const contacto = contactoBonito(p);
+  const direccion = (p.cliente_direccion || "").trim();
+  const estadoRaw = (p.estado || "").toString().trim();
+  const estadoLabel = estadoRaw
+    ? estadoRaw.charAt(0).toUpperCase() + estadoRaw.slice(1)
+    : "—";
+  const estadoClass = estadoClassName(estadoRaw);
   return `
     <tr data-id="${p.id}">
-      <td>${p.id}</td>
-      <td>${formatFecha(p.created_at)}</td>
-      <td>${escapeHtml(contactoBonito(p))}</td>
-      <td><span class="tag">${escapeHtml(p.estado)}</span></td>
-      <td>${fmtMoney(p.total)}</td>
-      <td><button class="btn js-ver">Ver</button></td>
+      <td class="col-id">#${p.id}</td>
+      <td class="col-fecha">${formatFecha(p.created_at)}</td>
+      <td class="col-cliente">
+        <strong>${escapeHtml(p.cliente_nombre || "—")}</strong>
+        ${
+          direccion
+            ? `<small>${escapeHtml(direccion)}</small>`
+            : ""
+        }
+      </td>
+      <td class="col-contacto">
+        ${
+          contacto
+            ? contacto
+                .split(' · ')
+                .map((c) => `<span>${escapeHtml(c)}</span>`)
+                .join("")
+            : '<span>—</span>'
+        }
+      </td>
+      <td class="col-estado"><span class="tag estado ${estadoClass}">${escapeHtml(estadoLabel)}</span></td>
+      <td class="col-total">${fmtMoney(p.total)}</td>
+      <td class="col-accion"><button class="btn js-ver">Ver</button></td>
     </tr>
   `;
 }
