@@ -92,6 +92,57 @@ app.post('/api/admin/productos', async (c) => {
   return c.json(rows[0], 201)
 })
 
+// LISTAR pedidos (admin)
+app.get('/api/admin/pedidos', async (c) => {
+  const db = getDb(c.env);
+  const rows = await db`
+    SELECT p.id, p.estado, p.total, p.creado_en AS created_at,
+           c.nombre AS cliente_nombre, c.email AS cliente_email, c.telefono AS cliente_telefono
+    FROM pedidos p
+    JOIN clientes c ON c.id = p.cliente_id
+    ORDER BY p.id DESC
+    LIMIT 100
+  `;
+  return c.json(rows);
+});
+
+// DETALLE de pedido (admin)
+app.get('/api/admin/pedidos/:id', async (c) => {
+  const db = getDb(c.env);
+  const id = Number(c.req.param('id'));
+  if (!Number.isFinite(id)) return c.text('ID inválido', 400);
+
+  const ped = await db`
+    SELECT 
+      p.id,
+      p.estado,
+      p.total,
+      p.creado_en AS created_at,   
+      /* p.notas  -- si más adelante agregás la columna */
+      c.nombre    AS cliente_nombre,
+      c.email     AS cliente_email,
+      c.telefono  AS cliente_telefono,
+      c.direccion AS cliente_direccion
+    FROM pedidos p
+    JOIN clientes c ON c.id = p.cliente_id
+    WHERE p.id = ${id}
+    LIMIT 1
+  `;
+  if (!ped.length) return c.text('No existe', 404);
+
+  const items = await db`
+    SELECT i.id, i.cantidad, i.precio_unit, pr.nombre
+    FROM pedido_items i
+    JOIN productos pr ON pr.id = i.producto_id
+    WHERE i.pedido_id = ${id}
+    ORDER BY i.id ASC
+  `;
+
+  return c.json({ pedido: ped[0], items });
+});
+
+
+
 // editar (sin SQL dinámico inseguro → COALESCE)
 app.put('/api/admin/productos/:id', async (c) => {
   const db = getDb(c.env)

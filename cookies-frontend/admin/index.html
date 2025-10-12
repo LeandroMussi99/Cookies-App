@@ -1,48 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="utf-8">
-  <title>Admin | Cookies</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Evita que lo indexen buscadores -->
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="/admin/admin.css">
-</head>
-<body>
-  <div class="admin-wrap">
-    <header class="admin-header">
-      <h1>Panel De Administracion</h1>
-      <div class="admin-actions">
-        <button id="btn-nuevo" class="btn primary">+ Nuevo Producto</button>
-        <a id="btn-logout" class="btn" href="#">Cerrar Sesion</a>
-      </div>
-    </header>
+  <head>
+    <meta charset="utf-8" />
+    <title>Admin | Cookies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Evita que lo indexen buscadores -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="/admin/admin.css" />
+  </head>
+  <body>
+    <div class="admin-wrap">
+      <header class="admin-header">
+        <h1>Panel De Administracion</h1>
+        <div class="admin-actions">
+          <button id="btn-nuevo" class="btn primary">+ Nuevo Producto</button>
+          <a id="btn-logout" class="btn" href="#">Cerrar Sesion</a>
+        </div>
+      </header>
 
-    <section>
-      <h2>Productos</h2>
-      <p id="admin-msg" class="msg"></p>
+      <section id="vista-productos">
+        <h2>Productos</h2>
+        <p id="admin-msg" class="msg"></p>
 
-      <table class="table" aria-describedby="admin-msg">
-        <thead>
-          <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Descripcion</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="tbody-productos">
+        <!-- Tabs -->
+        <nav class="tabs">
+          <button id="tab-prod" class="tab active">Productos</button>
+          <button id="tab-ped" class="tab">Pedidos</button>
+        </nav>
 
-        </tbody>
-      </table>
-    </section>
+        <table class="table" aria-describedby="admin-msg">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Descripcion</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-productos"></tbody>
+        </table>
+      </section>
 
-    <!-- Modal -->
-     <dialog id="modal-prod"></dialog>
-  </div>
+      <!-- Vista: Pedidos -->
+      <section id="vista-pedidos" hidden>
+        <div class="panel">
+          <h2>Pedidos</h2>
+          <p id="msg-ped">Cargando…</p>
+          <table class="tabla">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Contacto</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-ped"></tbody>
+          </table>
+        </div>
+      </section>
 
-  <script type="module" src="./admin.js"></script>
-</body>
+      <!-- Modal -->
+      <dialog id="modal-prod"></dialog>
+    </div>
+
+    <script type="module" src="./admin.js"></script>
+  </body>
 </html>

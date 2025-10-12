@@ -85,6 +85,11 @@
   border: 1px solid #f0ccc2; 
 }
 
+.tabs { display:flex; gap:.5rem; margin-bottom:1rem; }
+.tab { padding:.5rem .8rem; border:1px solid #ddd; background:#fff; cursor:pointer; }
+.tab.active { background:#222; color:#fff; border-color:#222; }
+
+
 /* === Modal producto === */
 #modal-prod {
   border: 0;
