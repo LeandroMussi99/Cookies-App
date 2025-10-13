@@ -18,15 +18,15 @@
         </div>
       </header>
 
+      <!-- Tabs centradas -->
+      <nav class="tabs tabs-centered" aria-label="Secciones de administración">
+        <button id="tab-prod" class="tab" aria-controls="vista-productos" aria-selected="true">Productos</button>
+        <button id="tab-ped"  class="tab" aria-controls="vista-pedidos"   aria-selected="false">Pedidos</button>
+      </nav>   
+
       <section id="vista-productos">
         <h2>Productos</h2>
         <p id="admin-msg" class="msg"></p>
-
-        <!-- Tabs -->
-        <nav class="tabs">
-          <button id="tab-prod" class="tab active">Productos</button>
-          <button id="tab-ped" class="tab">Pedidos</button>
-        </nav>
 
         <table class="table" aria-describedby="admin-msg">
           <thead>

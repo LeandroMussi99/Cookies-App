@@ -85,12 +85,29 @@
   border: 1px solid #f0ccc2; 
 }
 
+/* Tabs centradas */
+.tabs-centered {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 20px;
+}
 .tabs { display:flex; gap:.5rem; margin-bottom:1rem; }
-.tab { padding:.5rem .8rem; border:1px solid #ddd; background:#fff; cursor:pointer; }
+.tab {   padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ead9cd;
+  background: #fff7f2;
+  cursor: pointer;}
 .tab.active { background:#222; color:#fff; border-color:#222; }
 
 
 /* === Tabla de pedidos === */
+
+/* Ocultar “+ Nuevo Producto” cuando estoy en la vista de Pedidos */
+body.view-pedidos #btn-nuevo {
+  display: none !important;
+}
+
 .tabla {
   width: 100%;
   border-collapse: separate;

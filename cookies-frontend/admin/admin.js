@@ -29,6 +29,8 @@ function setLogoutLink() {
   $btnLogout.href = `/cdn-cgi/access/logout?returnTo=${returnTo}`;
 }
 
+
+
 // ===== Auth simple para /api/admin (Basic) =====
 // Pide user/pass una sola vez y lo guarda en sessionStorage.
 let ADMIN_AUTH = sessionStorage.getItem("ADMIN_AUTH") || "";
@@ -318,6 +320,17 @@ function showView(which) {
   if ($viewPed) $viewPed.hidden = prod;
 
   if (!prod) cargarPedidos();
+
+  // ---- Agregado para ocultar el botón en pedidos ----
+  if (prod) {
+    document.body.classList.add("view-productos");
+    document.body.classList.remove("view-pedidos");
+  } else {
+    document.body.classList.add("view-pedidos");
+    document.body.classList.remove("view-productos");
+  }
+  // ---------------------------------------------------
+
 }
 
 $tabProd.addEventListener("click", () => showView("prod"));
