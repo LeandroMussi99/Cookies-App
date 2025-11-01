@@ -3,7 +3,7 @@
 **Cookies App** es una aplicación web de comercio electrónico desarrollada para un pequeño emprendimiento de venta de cookies caseras.  
 Cuenta con un **frontend estático** en Vanilla JS y un **backend sin servidor (serverless)** desplegado en **Cloudflare Workers**, con integración a **Mercado Pago** y base de datos **PostgreSQL (Neon)**.
 
-> 🌐 **Sitio activo:** [https://cookiesapp.pages.dev](https://cookiesapp.pages.dev)  
+> 🌐 **Sitio activo:** https://cookies-frontend.pages.dev/
 > 🧾 *Los pagos están en modo prueba (sandbox de Mercado Pago) y no generan cobros reales.*
 
 ---
